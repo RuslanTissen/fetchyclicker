@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 export default function Search() {
+    const [searchResults, setSearchResults] = useState(null)
+    
     const url = "https://api.github.com/search/repositories?q=react&per_page=100&page=1"
 
     fetch(url)
@@ -8,8 +10,8 @@ export default function Search() {
             console.log(response)
             return response.json()
         })
-        .then(result => {
-            console.log(result);
+        .then(results => {
+            setSearchResults(results.items)
         })
 
 
