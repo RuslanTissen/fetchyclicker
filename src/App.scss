@@ -5,8 +5,8 @@
     img {
         margin: auto;
         border-radius: 50%;
-        animation: pause;
-        // animation: spin 5s infinite linear;
+        // animation: pause;
+        animation: spin 5s infinite linear;
     }
 
     @keyframes spin {

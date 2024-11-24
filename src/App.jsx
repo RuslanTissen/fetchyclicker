@@ -6,7 +6,6 @@ export default function App() {
         
         <main className="App">
             <Search />
-            {/* <img src="http://placekitten.com/200/200" alt="" /> */}
         </main>
     )
 }
