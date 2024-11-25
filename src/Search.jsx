@@ -3,21 +3,26 @@ import SearchResult from "./SearchResult.jsx"
 import Spiner from "./Spiner.jsx"
 
 export default function Search() {
-    const [searchResults, setSearchResults] = useState([])
-    const [page, setPage] = useState(1)
-    const [loading, setLoading] = useState(true)
+  const [searchResults, setSearchResults] = useState([])
+  const [page, setPage] = useState(1)
+  const [loading, setLoading] = useState(true)
+  function runThisEffectWhenPageChanges() {
+    console.log("useEffect running");
+    const url = "https://api.github.com/search/repositories?q=react&per_page=100&page="+page
+    setLoading(true)
+    fetch(url)
+        .then(response => response.json())
+        .then(results => {
+          setSearchResults(results.items)
+          setLoading(false)
+        })
+        .catch(error => {
+          setLoading(false)
+          alert("Ups, I failed to fetch:(")
+        })
+  }
 
-    useEffect(function() {
-      console.log("useEffect running");
-      const url = "https://api.github.com/search/repositories?q=react&per_page=100&page="+page
-      setLoading(true)
-      fetch(url)
-          .then(response => response.json())
-          .then(results => {
-            setSearchResults(results.items)
-            setLoading(false)
-          })
-    }, [page])
+  useEffect(runThisEffectWhenPageChanges, [page])
 
   function incrementPage(){setPage(page + 1)}
   function decrementPage(){setPage(page - 1)}
